@@ -2,6 +2,8 @@
 
 Esta plantilla se materializa después de publicar y congelar el manifiesto aprobado.
 Los tokens `{{...}}` se sustituyen únicamente por hechos cerrados de la constitución.
+Todo placeholder que contenga un path local Windows se materializa en forma transport-safe con
+barras `/` para el prompt final.
 No es autoridad sobre el ORQUESTADOR: la autoridad es `REGLAS-ORQUESTADOR.md` en
 `{{RULES_SHA}}`.
 
@@ -154,12 +156,56 @@ next_instance=current
 
 reutilizá exclusivamente la única sesión `CONSTRUCTOR current` vigente.
 
-## Transporte literal
+## Representación transport-safe
+
+Al materializar este prompt, todos los paths locales Windows destinados a viajar por interfaces
+gráficas deben usar barras `/`, por ejemplo:
+
+```text
+C:/Franco_Metodos_AI/work-claude-x
+```
+
+No materializar paths transportados con barras invertidas `\\` salvo que el runtime exija
+inequívocamente esa representación.
+
+Dentro del prompt materializado no agregar escapes de presentación a identificadores, delimitadores,
+URLs ni paths.
+
+Ejemplos:
+
+```text
+WORK_ID                         correcto
+WORK\_ID                       defecto de materialización
+BEGIN_PAQUETE_AUDITOR_INICIAL  correcto
+BEGIN\_PAQUETE\_AUDITOR...    defecto de materialización
+C:/raiz/repo                   forma transport-safe
+```
+
+El prompt final debe entregarse como texto crudo copiable; el receptor no debe reconstruir
+caracteres a partir de una representación Markdown renderizada.
+
+## Transporte literal e integridad
 
 El paquete inicial y cada `next_prompt` se transportan como el mismo string recibido.
 
 No resumir, corregir, reformular, completar, regenerar, traducir, normalizar semánticamente,
 cambiar palabras, sustituir valores ni reconstruir desde campos parciales.
+
+Antes de enviar `PAQUETE_AUDITOR_INICIAL`:
+
+```text
+1. tomar exactamente el string interior delimitado;
+2. calcular longitud UTF-8 y SHA-256 del string fuente;
+3. preparar/inserir ese mismo string en la interfaz destino;
+4. si la interfaz puede transformarlo, leer de vuelta el valor efectivamente preparado;
+5. calcular longitud UTF-8 y SHA-256 del valor preparado/leído;
+6. si cualquiera difiere, NO enviar y reportar fail-closed;
+7. si aparecieron adjuntos, uploads o artefactos laterales no presentes en el string fuente,
+   NO enviar y reportar fail-closed;
+8. sólo con igualdad demostrada ejecutar la acción final de envío.
+```
+
+Aplicar las garantías de integridad de `REGLAS-ORQUESTADOR.md` también a los pases internos.
 
 ## Política de relevo materializada
 

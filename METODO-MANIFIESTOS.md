@@ -167,6 +167,21 @@ R-4-raiz-lectura      si existe ROOT_LOCAL, el prompt explicita si esa raiz es s
 R-4-auditor-conoce    el paquete del AUDITOR inicial declara inequívocamente dónde trabaja el
                       propio AUDITOR, dónde trabaja el CONSTRUCTOR y qué repositorios y paths son
                       de lectura para cada uno
+R-4-path-transporte   al materializar prompts destinados a transporte por interfaces graficas,
+                      los paths locales Windows se expresan en forma canonica transport-safe con
+                      barras /, por ejemplo C:/raiz/repo, salvo que el runtime exija
+                      inequivocamente otra representacion
+R-4-sin-escapes-ui    identificadores, delimitadores, nombres de campos, URLs y paths dentro del
+                      prompt materializado no contienen escapes agregados por Markdown u otra
+                      capa de presentacion; WORK_ID no puede materializarse como WORK\_ID
+R-4-raw-final         el prompt final del ORQUESTADOR se entrega en una superficie de texto crudo
+                      copiable que preserve exactamente los caracteres materializados, sin
+                      depender de renderizado Markdown para reconstruirlos
+R-4-integridad-inicial el prompt materializado exige que antes de enviar PAQUETE_AUDITOR_INICIAL
+                      el adaptador aplique el preflight de integridad de CT-7, incluida lectura de
+                      vuelta del valor preparado cuando la interfaz pueda transformarlo
+R-4-sin-adjuntos      si la insercion del paquete produce adjuntos, uploads u otros artefactos que
+                      no pertenecen al string fuente, el envio se prohibe y se detiene
 ```
 
 Nota. El primer AUDITOR de un trabajo no llega desde un sobre anterior y todavía no existe ningún

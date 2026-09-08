@@ -236,9 +236,18 @@ El prompt final debe incluir inequívocamente:
 - guardrails de relevos humanos;
 - guardrail que prohíbe abrir un `fresh` sin un sobre válido que lo ordene;
 - transporte literal;
+- paths locales Windows materializados en forma transport-safe con barras `/`;
+- ausencia de escapes de presentación dentro de identificadores, delimitadores, URLs y paths;
+- preflight de integridad del paquete inicial antes del envío, incluida lectura de vuelta de la interfaz cuando pueda transformar texto;
+- fail-closed si aparecen adjuntos o artefactos laterales no pertenecientes al string fuente;
 - separación mecánica entre instrucciones privadas del ORQUESTADOR y `PAQUETE_AUDITOR_INICIAL`;
 - instrucción inequívoca de que el primer AUDITOR se abre como conversación NUEVA de ChatGPT web cuando ese sea el runtime declarado.
 
 El primer AUDITOR debe recibir únicamente `PAQUETE_AUDITOR_INICIAL`, nunca las instrucciones privadas del ORQUESTADOR.
 
 No me entregues un prompt genérico con placeholders una vez terminado el proceso: el prompt final debe estar completamente materializado con las coordenadas reales de este trabajo.
+
+Para el prompt final, si yo proporcioné paths Windows con barras invertidas, canonicalizalos para
+transporte como `C:/ruta/repo` sin cambiar su significado. No agregues escapes Markdown como
+`WORK\_ID`, `BEGIN\_PAQUETE...` o `C:/Franco\_Metodos\_AI`; el texto entregado debe contener
+los caracteres reales que debe recibir el ORQUESTADOR.
