@@ -124,6 +124,34 @@ R-4-sin-secretos      el paquete transporta referencias seguras a credenciales y
                       valores
 R-4-no-bootstrap      el paquete es la entrada con la que el primer AUDITOR construye su
                       BOOTSTRAP.md; no lo sustituye y no redefine que hechos registra
+R-4-prompt-orquestador despues de publicar y congelar el manifiesto, el metodo materializa tambien
+                      un prompt de arranque del ORQUESTADOR desde
+                      plantillas/ARRANQUE_ORQUESTADOR.md
+R-4-dos-superficies   el prompt de arranque separa mecanicamente las instrucciones destinadas al
+                      ORQUESTADOR del paquete destinado al AUDITOR inicial
+R-4-solo-paquete      el AUDITOR inicial recibe exclusivamente el contenido delimitado como
+                      PAQUETE_AUDITOR_INICIAL; nunca recibe instrucciones privadas del
+                      ORQUESTADOR ni los marcadores de delimitacion
+R-4-parametriza       la plantilla materializa unicamente hechos ya cerrados por manifiesto o
+                      constitucion: identidades, repositorios, paths, runtimes, capacidades,
+                      referencias seguras y politicas iniciales
+R-4-redundancia       la plantilla puede repetir en forma operacional guardrails que ya pertenecen
+                      a reglas-orchestrator-ai cuando esa redundancia reduce ambiguedad de
+                      ejecucion; repetirlos no crea una autoridad nueva
+R-4-rules-prevalece   ante contradiccion, la identidad RULES_SHA congelada en la constitucion
+                      prevalece sobre cualquier texto materializado por la plantilla
+R-4-no-fresh-directo  ninguna directiva humana, politica periodica, limite de unidad, conteo,
+                      texto libre ni inferencia autoriza al ORQUESTADOR a abrir una instancia
+                      fresh; solo next_instance=fresh en un sobre valido lo autoriza
+R-4-relevo-humano     una directiva humana de relevo se materializa como directiva para el actor
+                      competente conforme a CT-7 y nunca como autorizacion directa de runtime
+R-4-preflight-runtime antes de abrir un runtime fresh el prompt exige un preflight binario:
+                      existe un sobre valido para ese rol con next_instance=fresh; si no existe,
+                      no se abre la instancia
+R-4-current           despues de un fresh confirmado, el nuevo handle sustituye al current
+                      anterior y el anterior deja de ser elegible
+R-4-literalidad       el prompt exige transporte literal del paquete inicial y de cada
+                      next_prompt; no permite regenerarlos desde campos parciales
 ```
 
 Nota. El primer AUDITOR de un trabajo no llega desde un sobre anterior y todavía no existe ningún
@@ -132,6 +160,15 @@ forma de la entrada que permite construirlo.
 
 Nota. Una referencia segura nombra dónde vive el secreto, no el secreto. `TOKEN_FUDO → variable de
 entorno FUDO_TOKEN` es admisible; el valor del token no lo es.
+
+Nota. La plantilla de arranque es una superficie de materialización, no una copia normativa de
+CT-7. Su redundancia es deliberada: transforma reglas especialmente sensibles a errores de
+operación en condiciones binarias visibles en el prompt que recibe el ORQUESTADOR. La autoridad
+sigue estando en `REGLAS-ORQUESTADOR.md` en el `RULES_SHA` de la constitución.
+
+Nota. `BEGIN_PAQUETE_AUDITOR_INICIAL` y `END_PAQUETE_AUDITOR_INICIAL` son delimitadores de la
+plantilla. El ORQUESTADOR entrega únicamente el contenido interior y no los marcadores. El primer
+texto que recibe el AUDITOR debe identificarlo como AUDITOR, no instruirlo a abrir otro actor.
 
 ---
 
