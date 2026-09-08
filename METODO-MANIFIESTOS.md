@@ -152,6 +152,21 @@ R-4-current           despues de un fresh confirmado, el nuevo handle sustituye 
                       anterior y el anterior deja de ser elegible
 R-4-literalidad       el prompt exige transporte literal del paquete inicial y de cada
                       next_prompt; no permite regenerarlos desde campos parciales
+R-4-runtime-explicito el prompt materializado declara de forma explicita el runtime del AUDITOR y
+                      del CONSTRUCTOR, incluido ChatGPT web para el AUDITOR cuando ese sea el
+                      entorno aprobado y Claude Code local para el CONSTRUCTOR cuando corresponda
+R-4-superficies       el prompt materializado declara por actor su repositorio de escritura, su
+                      path local de trabajo cuando exista, sus repositorios y paths de lectura y
+                      las superficies sobre las que tiene prohibida la escritura
+R-4-repos-completos   cuando el humano provee repositorios GitHub y clones locales, el paquete
+                      materializado conserva ambos conjuntos de coordenadas para que los actores
+                      puedan localizar las mismas fuentes sin inferir equivalencias
+R-4-raiz-lectura      si existe ROOT_LOCAL, el prompt explicita si esa raiz es superficie de
+                      lectura para el CONSTRUCTOR y distingue esa capacidad de su directorio de
+                      trabajo material
+R-4-auditor-conoce    el paquete del AUDITOR inicial declara inequívocamente dónde trabaja el
+                      propio AUDITOR, dónde trabaja el CONSTRUCTOR y qué repositorios y paths son
+                      de lectura para cada uno
 ```
 
 Nota. El primer AUDITOR de un trabajo no llega desde un sobre anterior y todavía no existe ningún

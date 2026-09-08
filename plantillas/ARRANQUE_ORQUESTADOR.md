@@ -22,9 +22,41 @@ RULES_PATH={{RULES_PATH}}
 RULES_SHA={{RULES_SHA}}
 ```
 
+RUNTIMES Y SUPERFICIES RESUELTOS:
+
+```text
+AUDITOR_RUNTIME={{AUDITOR_RUNTIME}}
+AUDITOR_WRITE_REPO={{AUDIT_REPO}}
+AUDITOR_LOCAL_PATH={{AUDITOR_LOCAL_PATH}}
+
+CONSTRUCTOR_RUNTIME={{CONSTRUCTOR_RUNTIME}}
+CONSTRUCTOR_WRITE_REPO={{WORK_REPO}}
+CONSTRUCTOR_LOCAL_PATH={{CONSTRUCTOR_LOCAL_PATH}}
+
+ROOT_LOCAL={{ROOT_LOCAL}}
+```
+
+REPOSITORIOS GITHUB DISPONIBLES PARA LOCALIZACIÓN/LECTURA:
+
+```text
+{{REPOS_GITHUB_DISPONIBLES}}
+```
+
+REPOSITORIOS/PATHS LOCALES DISPONIBLES PARA LOCALIZACIÓN/LECTURA:
+
+```text
+{{REPOS_LOCALES_DISPONIBLES}}
+```
+
+El AUDITOR trabaja materialmente sólo en `{{AUDIT_REPO}}`.
+El CONSTRUCTOR trabaja materialmente sólo en `{{WORK_REPO}}`, desde
+`{{CONSTRUCTOR_LOCAL_PATH}}`.
+La existencia de `{{ROOT_LOCAL}}` como raíz de lectura no convierte esa raíz completa en
+superficie material de escritura del CONSTRUCTOR.
+
 ## Guardrails de arranque
 
-1. Abrí una conversación NUEVA de ChatGPT.
+1. Abrí una conversación NUEVA de ChatGPT en el runtime `{{AUDITOR_RUNTIME}}`.
 2. Registrala como la instancia inicial `AUDITOR current`.
 3. Entregale EXCLUSIVAMENTE el contenido entre
    `BEGIN_PAQUETE_AUDITOR_INICIAL` y `END_PAQUETE_AUDITOR_INICIAL`.
@@ -218,6 +250,23 @@ RULES_SHA={{RULES_SHA}}
 WORK_REPO={{WORK_REPO}}
 AUDIT_REPO={{AUDIT_REPO}}
 
+RUNTIMES:
+AUDITOR_RUNTIME={{AUDITOR_RUNTIME}}
+CONSTRUCTOR_RUNTIME={{CONSTRUCTOR_RUNTIME}}
+
+SUPERFICIES_DE_TRABAJO:
+AUDITOR_WRITE_REPO={{AUDIT_REPO}}
+AUDITOR_LOCAL_PATH={{AUDITOR_LOCAL_PATH}}
+CONSTRUCTOR_WRITE_REPO={{WORK_REPO}}
+CONSTRUCTOR_LOCAL_PATH={{CONSTRUCTOR_LOCAL_PATH}}
+CONSTRUCTOR_READ_ROOT_LOCAL={{ROOT_LOCAL}}
+
+REPOS_GITHUB_DISPONIBLES:
+{{REPOS_GITHUB_DISPONIBLES}}
+
+REPOS_LOCALES_DISPONIBLES:
+{{REPOS_LOCALES_DISPONIBLES}}
+
 SOURCE_REPOS:
 {{SOURCE_REPOS}}
 
@@ -240,6 +289,15 @@ REFERENCIAS_SEGURAS_A_CREDENCIALES:
 
 POLITICAS_DE_EJECUCION_INICIALES:
 {{POLITICAS_DE_EJECUCION_INICIALES}}
+
+UBICACION_Y_FRONTERAS_DE_ACTORES:
+- Vos sos el AUDITOR y tu superficie material de escritura es {{AUDIT_REPO}}.
+- El CONSTRUCTOR trabaja materialmente en {{WORK_REPO}}.
+- Cuando el CONSTRUCTOR sea local, su directorio de trabajo exacto es {{CONSTRUCTOR_LOCAL_PATH}}.
+- El CONSTRUCTOR puede localizar/leer las fuentes declaradas bajo {{ROOT_LOCAL}} cuando esa
+  capacidad esté incluida en la constitución.
+- Los repositorios y paths GitHub/locales declarados arriba son coordenadas de localización y
+  lectura; no amplían por sí mismos ninguna frontera de escritura.
 
 Constituite como AUDITOR inicial conforme a REVOLUTIONS.
 Creá y publicá tu propio BOOTSTRAP.md durable en AUDIT_REPO.
