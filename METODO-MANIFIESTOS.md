@@ -182,6 +182,18 @@ R-4-integridad-inicial el prompt materializado exige que antes de enviar PAQUETE
                       vuelta del valor preparado cuando la interfaz pueda transformarlo
 R-4-sin-adjuntos      si la insercion del paquete produce adjuntos, uploads u otros artefactos que
                       no pertenecen al string fuente, el envio se prohibe y se detiene
+R-4-constitucion-git  despues de aprobar y publicar el manifiesto, el metodo publica tambien una
+                      constitucion inicial durable en la biblioteca del trabajo, por defecto en
+                      manifiestos/<WORK_ID>/CONSTITUCION_INICIAL.md
+R-4-constitucion-sha  la constitucion inicial queda identificada por repositorio, path y commit SHA
+                      exacto; el prompt de arranque no transporta de nuevo su contenido completo
+R-4-paquete-minimo    PAQUETE_AUDITOR_INICIAL contiene solo la identidad del trabajo, las
+                      coordenadas Git exactas de la constitucion y la instruccion minima para que
+                      el AUDITOR la lea y se constituya conforme a REVOLUTIONS
+R-4-git-transporta    la informacion constitutiva compleja viaja por Git y no por transcripcion GUI;
+                      el ORQUESTADOR transporta un locator corto y no reconstruye la constitucion
+R-4-constitucion-antes el prompt del ORQUESTADOR se materializa solo despues de publicar la
+                      constitucion inicial y obtener su SHA exacto
 ```
 
 Nota. El primer AUDITOR de un trabajo no llega desde un sobre anterior y todavía no existe ningún

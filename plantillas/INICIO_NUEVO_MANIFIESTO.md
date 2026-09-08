@@ -209,9 +209,10 @@ Trabajá en este orden:
 6. No publicar antes de esa aprobación.
 7. Una vez aprobado, publicar el manifiesto en manifiestos-trabajo-ai.
 8. Obtener su SHA exacto y las demás identidades Git necesarias.
-9. Materializar el paquete de constitución.
-10. Materializar plantillas/ARRANQUE_ORQUESTADOR.md con todos los valores reales.
-11. Entregarme el prompt completo del ORQUESTADOR listo para copiar y pegar.
+9. Materializar y publicar la constitución inicial durable del trabajo en la biblioteca.
+10. Obtener CONSTITUTION_REPO, CONSTITUTION_PATH y CONSTITUTION_SHA exactos.
+11. Materializar plantillas/ARRANQUE_ORQUESTADOR.md con todos los valores reales.
+12. Entregarme el prompt completo del ORQUESTADOR listo para copiar y pegar.
 ```
 
 ## Requisito del prompt final del ORQUESTADOR
@@ -222,6 +223,7 @@ El prompt final debe incluir inequívocamente:
 - `CARRIL`;
 - método y SHA exacto;
 - manifiesto, path y SHA exacto;
+- constitución inicial durable, path y SHA exacto;
 - reglas del ORQUESTADOR y SHA exacto;
 - repositorio del AUDITOR;
 - repositorio del CONSTRUCTOR;
@@ -246,6 +248,10 @@ El prompt final debe incluir inequívocamente:
 El primer AUDITOR debe recibir únicamente `PAQUETE_AUDITOR_INICIAL`, nunca las instrucciones privadas del ORQUESTADOR.
 
 No me entregues un prompt genérico con placeholders una vez terminado el proceso: el prompt final debe estar completamente materializado con las coordenadas reales de este trabajo.
+
+El PAQUETE_AUDITOR_INICIAL del prompt final debe ser corto: no repite la constitución completa.
+Transporta únicamente WORK_ID, CARRIL, CONSTITUTION_REPO, CONSTITUTION_PATH, CONSTITUTION_SHA y la
+instrucción mínima para que el AUDITOR lea esa constitución desde Git y se constituya.
 
 Para el prompt final, si yo proporcioné paths Windows con barras invertidas, canonicalizalos para
 transporte como `C:/ruta/repo` sin cambiar su significado. No agregues escapes Markdown como

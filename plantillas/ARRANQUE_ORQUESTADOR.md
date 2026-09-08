@@ -1,7 +1,8 @@
 # PLANTILLA — ARRANQUE DEL ORQUESTADOR
 
-Esta plantilla se materializa después de publicar y congelar el manifiesto aprobado.
-Los tokens `{{...}}` se sustituyen únicamente por hechos cerrados de la constitución.
+Esta plantilla se materializa después de publicar y congelar el manifiesto aprobado y de publicar
+la constitución inicial durable del trabajo. Los tokens `{{...}}` se sustituyen únicamente por
+hechos cerrados de la constitución.
 Todo placeholder que contenga un path local Windows se materializa en forma transport-safe con
 barras `/` para el prompt final.
 No es autoridad sobre el ORQUESTADOR: la autoridad es `REGLAS-ORQUESTADOR.md` en
@@ -23,6 +24,17 @@ RULES_REPO={{RULES_REPO}}
 RULES_PATH={{RULES_PATH}}
 RULES_SHA={{RULES_SHA}}
 ```
+
+CONSTITUCIÓN INICIAL DURABLE:
+
+```text
+CONSTITUTION_REPO={{CONSTITUTION_REPO}}
+CONSTITUTION_PATH={{CONSTITUTION_PATH}}
+CONSTITUTION_SHA={{CONSTITUTION_SHA}}
+```
+
+La constitución completa se lee desde Git. No la reconstruyas ni la copies dentro del
+PAQUETE_AUDITOR_INICIAL.
 
 RUNTIMES Y SUPERFICIES RESUELTOS:
 
@@ -61,7 +73,30 @@ superficie material de escritura del CONSTRUCTOR.
 1. Abrí una conversación NUEVA de ChatGPT en el runtime `{{AUDITOR_RUNTIME}}`.
 2. Registrala como la instancia inicial `AUDITOR current`.
 3. Entregale EXCLUSIVAMENTE el contenido entre
-   `BEGIN_PAQUETE_AUDITOR_INICIAL` y `END_PAQUETE_AUDITOR_INICIAL`.
+   `BEGIN_PAQUETE_AUDITOR_INICIAL
+
+ROL=AUDITOR
+INSTANCE=INITIAL
+
+WORK_ID={{WORK_ID}}
+CARRIL={{CARRIL}}
+
+CONSTITUTION_REPO={{CONSTITUTION_REPO}}
+CONSTITUTION_PATH={{CONSTITUTION_PATH}}
+CONSTITUTION_SHA={{CONSTITUTION_SHA}}
+
+Leé exclusivamente la constitución congelada en esas coordenadas Git y reconstruí desde allí todos
+los hechos constitutivos del trabajo.
+
+Constituite como AUDITOR inicial conforme a REVOLUTIONS.
+Creá y publicá tu propio BOOTSTRAP.md durable en el AUDIT_REPO declarado por la constitución.
+No actúes como ORQUESTADOR.
+No abras otros actores por cuenta propia.
+Determiná la primera acción conforme al método y al manifiesto congelados en la constitución.
+Cerrá tu respuesta con el primer sobre válido `revolutions-hop/v1`, con `turn_id=1` y
+`actor=AUDITOR`.
+
+END_PAQUETE_AUDITOR_INICIAL`.
 4. NO entregues los marcadores.
 5. NO entregues ninguna línea exterior a esos marcadores.
 6. NO crees `BOOTSTRAP.md`.
@@ -196,13 +231,14 @@ Antes de enviar `PAQUETE_AUDITOR_INICIAL`:
 ```text
 1. tomar exactamente el string interior delimitado;
 2. calcular longitud UTF-8 y SHA-256 del string fuente;
-3. preparar/inserir ese mismo string en la interfaz destino;
-4. si la interfaz puede transformarlo, leer de vuelta el valor efectivamente preparado;
-5. calcular longitud UTF-8 y SHA-256 del valor preparado/leído;
-6. si cualquiera difiere, NO enviar y reportar fail-closed;
-7. si aparecieron adjuntos, uploads o artefactos laterales no presentes en el string fuente,
+3. preparar/inserir ese mismo string mediante la primitiva normal de texto del adaptador;
+4. si la interfaz ofrece readback mecánico, leer de vuelta el valor y comparar longitud UTF-8 y
+   SHA-256;
+5. si no ofrece readback, no inventar mecanismos auxiliares como file:// para demostrar igualdad;
+6. si se observa cualquier transformación, adjunto, upload, pérdida de caracteres o ambigüedad,
    NO enviar y reportar fail-closed;
-8. sólo con igualdad demostrada ejecutar la acción final de envío.
+7. si no se observa anomalía y no existe readback disponible, el envío puede continuar conforme a
+   REGLAS-ORQUESTADOR.md.
 ```
 
 Aplicar las garantías de integridad de `REGLAS-ORQUESTADOR.md` también a los pases internos.
