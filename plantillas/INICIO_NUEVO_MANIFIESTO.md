@@ -242,16 +242,18 @@ El prompt final debe incluir inequívocamente:
 - ausencia de escapes de presentación dentro de identificadores, delimitadores, URLs y paths;
 - preflight de integridad del paquete inicial antes del envío, incluida lectura de vuelta de la interfaz cuando pueda transformar texto;
 - fail-closed si aparecen adjuntos o artefactos laterales no pertenecientes al string fuente;
-- separación mecánica entre instrucciones privadas del ORQUESTADOR y `PAQUETE_AUDITOR_INICIAL`;
+- separación mecánica entre instrucciones privadas del ORQUESTADOR y el locator auditor-init/v1;
+- locator inicial ASCII de una sola línea, sin URL completa ni Markdown;
 - instrucción inequívoca de que el primer AUDITOR se abre como conversación NUEVA de ChatGPT web cuando ese sea el runtime declarado.
 
 El primer AUDITOR debe recibir únicamente `PAQUETE_AUDITOR_INICIAL`, nunca las instrucciones privadas del ORQUESTADOR.
 
 No me entregues un prompt genérico con placeholders una vez terminado el proceso: el prompt final debe estar completamente materializado con las coordenadas reales de este trabajo.
 
-El PAQUETE_AUDITOR_INICIAL del prompt final debe ser corto: no repite la constitución completa.
-Transporta únicamente WORK_ID, CARRIL, CONSTITUTION_REPO, CONSTITUTION_PATH, CONSTITUTION_SHA y la
-instrucción mínima para que el AUDITOR lea esa constitución desde Git y se constituya.
+El arranque inicial del prompt final debe usar auditor-init/v1: una unica linea ASCII que no
+repite la constitucion completa y transporta WORK_ID, CARRIL, CONSTITUTION_REPO en forma owner/repo,
+CONSTITUTION_PATH y CONSTITUTION_SHA. No debe incluir URL completa, Markdown, paths Windows ni texto
+libre dentro del locator.
 
 Para el prompt final, si yo proporcioné paths Windows con barras invertidas, canonicalizalos para
 transporte como `C:/ruta/repo` sin cambiar su significado. No agregues escapes Markdown como

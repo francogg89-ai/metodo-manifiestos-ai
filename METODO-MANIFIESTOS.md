@@ -187,9 +187,12 @@ R-4-constitucion-git  despues de aprobar y publicar el manifiesto, el metodo pub
                       manifiestos/<WORK_ID>/CONSTITUCION_INICIAL.md
 R-4-constitucion-sha  la constitucion inicial queda identificada por repositorio, path y commit SHA
                       exacto; el prompt de arranque no transporta de nuevo su contenido completo
-R-4-paquete-minimo    PAQUETE_AUDITOR_INICIAL contiene solo la identidad del trabajo, las
-                      coordenadas Git exactas de la constitucion y la instruccion minima para que
-                      el AUDITOR la lea y se constituya conforme a REVOLUTIONS
+R-4-paquete-minimo    el arranque externo usa auditor-init/v1, un locator ASCII de una sola linea
+                      que contiene WORK_ID, CARRIL, CONSTITUTION_REPO en forma owner/repo,
+                      CONSTITUTION_PATH y CONSTITUTION_SHA
+R-4-init-canonico      el locator auditor-init/v1 no contiene URLs completas, Markdown, paths
+                      Windows, texto libre ni caracteres no ASCII; puede tolerar un unico BOM
+                      U+FEFF inicial conforme a CT-7
 R-4-git-transporta    la informacion constitutiva compleja viaja por Git y no por transcripcion GUI;
                       el ORQUESTADOR transporta un locator corto y no reconstruye la constitucion
 R-4-constitucion-antes el prompt del ORQUESTADOR se materializa solo despues de publicar la
@@ -208,9 +211,8 @@ CT-7. Su redundancia es deliberada: transforma reglas especialmente sensibles a 
 operación en condiciones binarias visibles en el prompt que recibe el ORQUESTADOR. La autoridad
 sigue estando en `REGLAS-ORQUESTADOR.md` en el `RULES_SHA` de la constitución.
 
-Nota. `BEGIN_PAQUETE_AUDITOR_INICIAL` y `END_PAQUETE_AUDITOR_INICIAL` son delimitadores de la
-plantilla. El ORQUESTADOR entrega únicamente el contenido interior y no los marcadores. El primer
-texto que recibe el AUDITOR debe identificarlo como AUDITOR, no instruirlo a abrir otro actor.
+Nota. El arranque inicial ya no usa un bloque multilinea delimitado. Usa una unica linea
+`AUDITOR_INIT_V1|...`, mecanicamente parseable. La constitucion completa se obtiene desde Git.
 
 ---
 
